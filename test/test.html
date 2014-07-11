@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>HyperCat Test</title>
+		<script src="../js/hypercat.js"></script>
+	</head>
+	<body style="text-align: center;">
+		<canvas id="canvas" width="480" height="360" style="border: solid 1px black;"></canvas>
+		<p>Delay in milliseconds: <span id="delaytext">25</span></p>
+		<br />
+		<input id="delayslider" type="range" min="0" max="100" value="25" onchange="document.getElementById('delaytext').innerText = this.value;" />
+		<script type="text/javascript">
+			var dir = 1;
+
+			// Set the canvas - accepts a canvas element
+			hc.setCanvas('#canvas');
+
+			// Create sprites - accepts an array of sprites
+			// Each sprite is a JSON object with 'name' being the sprite name and 'image' being the image URL
+			// We must wait for images to load before they can be used so we have a callback function
+			hc.sprites.create([
+				{name: 'square', image: 'image1.jpg'},
+				{name: 'circle', image: 'image2.png'}
+			], done);
+
+			// Function is called when images are finished loading
+			function done() {
+
+				// Set coordinates of 'square' to -50,0 and make it visible on the canvas
+				hc('square').position(-208, 0).show();
+
+				// Set coordinates of 'circle' to 50,0 and make it visible on the canvas
+				hc('circle').position(208, 0).show();
+
+				// Draw sprites on the canvas
+				hc.draw();
+
+				// Execute function every number of milliseconds set by slider bar
+				function repeat() {
+					// If sprite x position is less than 45 or greater than 208, reverse direction
+					if (Math.abs(hc('square').getX()) < 45 || Math.abs(hc('square').getX()) > 208)
+						dir *= -1;
+					// Change the x position of the sprites and redraw
+					hc('square').changeSizeBy(dir*0.2).moveBy(dir, 0).rotate(dir);
+					hc('circle').changeSizeBy(dir*0.2).moveBy(dir*-1, 0).rotate(dir*-1);
+					hc.draw();
+					setTimeout(repeat, document.getElementById('delayslider').value);
+				}
+				repeat();
+			}
+		</script>
+	</body>
+</html>
