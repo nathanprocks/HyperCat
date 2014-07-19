@@ -56,6 +56,7 @@ hc.prototype = {
  	move: function(dist) {
  		hc.getSprite(this.sprite).x += Math.sin(hc.getSprite(this.sprite).angle) * dist;
  		hc.getSprite(this.sprite).y += Math.cos(hc.getSprite(this.sprite).angle) * dist;
+ 		return this;
  	},
 
  	position: function(x, y) {
