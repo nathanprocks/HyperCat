@@ -73,6 +73,9 @@ hc.prototype = {
  		hc.getSprite(this.sprite).size = size;
  		return this;
  	}
+ 	playSound: function(url) {
+ 		new Audio(url).play();
+ 	}
 }
 
 hc.draw = function() {
