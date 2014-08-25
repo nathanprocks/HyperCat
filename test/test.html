@@ -39,9 +39,10 @@
 				// Execute function every number of milliseconds set by slider bar
 				function repeat() {
 					// If sprite x position is less than 45 or greater than 208, reverse direction
-					if (Math.abs(hc('square').getX()) < 45 || Math.abs(hc('square').getX()) > 208)
+					if (Math.abs(hc('square').getX()) < 45 || Math.abs(hc('square').getX()) > 208) {
 						dir *= -1;
-						hc('square').playSound();
+						hc('square').playSound(popSound);
+                    }
 					// Change the x position of the sprites and redraw
 					hc('square').changeSizeBy(dir*0.2).moveBy(dir, 0).rotate(dir);
 					hc('circle').changeSizeBy(dir*0.2).moveBy(dir*-1, 0).rotate(dir*-1);
