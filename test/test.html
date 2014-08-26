@@ -11,6 +11,7 @@
 		<input id="delayslider" type="range" min="0" max="100" value="25" onchange="document.getElementById('delaytext').innerText = this.value;" />
 		<script type="text/javascript">
 			var dir = 1;
+			var popSound = "https://dl-web.dropbox.com/get/pop.wav?_subject_uid=79025865&w=AADYacoYQUV1xMbSzp6lINDnzgthcyZgwqPXq9Y1FxVnxg"; //Pop sound effect, taken from Scratch
 
 			// Set the canvas - accepts a canvas element
 			hc.setCanvas('#canvas');
@@ -38,8 +39,10 @@
 				// Execute function every number of milliseconds set by slider bar
 				function repeat() {
 					// If sprite x position is less than 45 or greater than 208, reverse direction
-					if (Math.abs(hc('square').getX()) < 45 || Math.abs(hc('square').getX()) > 208)
+					if (Math.abs(hc('square').getX()) < 45 || Math.abs(hc('square').getX()) > 208) {
 						dir *= -1;
+						hc('square').playSound(popSound);
+                    }
 					// Change the x position of the sprites and redraw
 					hc('square').changeSizeBy(dir*0.2).moveBy(dir, 0).rotate(dir);
 					hc('circle').changeSizeBy(dir*0.2).moveBy(dir*-1, 0).rotate(dir*-1);
