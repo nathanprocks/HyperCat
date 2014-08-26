@@ -58,6 +58,11 @@ hc.prototype = {
  		hc.getSprite(this.sprite).y += Math.cos(hc.getSprite(this.sprite).angle) * dist;
  		return this;
  	},
+ 	
+ 	playSound: function(url) {
+ 		new Audio(url).play();
+		return this;
+ 	},
 
  	position: function(x, y) {
 		hc.getSprite(this.sprite).x = x;
@@ -78,10 +83,6 @@ hc.prototype = {
  	size: function(size) {
  		hc.getSprite(this.sprite).size = size;
  		return this;
- 	},
- 	playSound: function(url) {
- 		new Audio(url).play();
-        return this;
  	},
 }
 
